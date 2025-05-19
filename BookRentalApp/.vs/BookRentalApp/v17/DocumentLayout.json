@@ -3,24 +3,28 @@
   "WorkspaceRootPath": "C:\\Users\\Tomasz\\Desktop\\BookRentalApp\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B1A22DBE-C297-436B-993B-7DC6CD167A9F}|BookRentalApp\\BookRentalApp.csproj|c:\\users\\tomasz\\desktop\\bookrentalapp\\bookrentalapp\\models\\rental.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B1A22DBE-C297-436B-993B-7DC6CD167A9F}|BookRentalApp\\BookRentalApp.csproj|solutionrelative:bookrentalapp\\models\\rental.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B1A22DBE-C297-436B-993B-7DC6CD167A9F}|BookRentalApp\\BookRentalApp.csproj|c:\\users\\tomasz\\desktop\\bookrentalapp\\bookrentalapp\\models\\customer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B1A22DBE-C297-436B-993B-7DC6CD167A9F}|BookRentalApp\\BookRentalApp.csproj|solutionrelative:bookrentalapp\\models\\customer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B1A22DBE-C297-436B-993B-7DC6CD167A9F}|BookRentalApp\\BookRentalApp.csproj|c:\\users\\tomasz\\desktop\\bookrentalapp\\bookrentalapp\\models\\book.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B1A22DBE-C297-436B-993B-7DC6CD167A9F}|BookRentalApp\\BookRentalApp.csproj|solutionrelative:bookrentalapp\\models\\book.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B1A22DBE-C297-436B-993B-7DC6CD167A9F}|BookRentalApp\\BookRentalApp.csproj|c:\\users\\tomasz\\desktop\\bookrentalapp\\bookrentalapp\\formrental.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B1A22DBE-C297-436B-993B-7DC6CD167A9F}|BookRentalApp\\BookRentalApp.csproj|solutionrelative:bookrentalapp\\formrental.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B1A22DBE-C297-436B-993B-7DC6CD167A9F}|BookRentalApp\\BookRentalApp.csproj|c:\\users\\tomasz\\desktop\\bookrentalapp\\bookrentalapp\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B1A22DBE-C297-436B-993B-7DC6CD167A9F}|BookRentalApp\\BookRentalApp.csproj|solutionrelative:bookrentalapp\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B1A22DBE-C297-436B-993B-7DC6CD167A9F}|BookRentalApp\\BookRentalApp.csproj|c:\\users\\tomasz\\desktop\\bookrentalapp\\bookrentalapp\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{B1A22DBE-C297-436B-993B-7DC6CD167A9F}|BookRentalApp\\BookRentalApp.csproj|C:\\Users\\Tomasz\\Desktop\\BookRentalApp\\bookrentalapp\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{B1A22DBE-C297-436B-993B-7DC6CD167A9F}|BookRentalApp\\BookRentalApp.csproj|solutionrelative:bookrentalapp\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B1A22DBE-C297-436B-993B-7DC6CD167A9F}|BookRentalApp\\BookRentalApp.csproj|c:\\users\\tomasz\\desktop\\bookrentalapp\\bookrentalapp\\formbook.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B1A22DBE-C297-436B-993B-7DC6CD167A9F}|BookRentalApp\\BookRentalApp.csproj|solutionrelative:bookrentalapp\\formbook.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B1A22DBE-C297-436B-993B-7DC6CD167A9F}|BookRentalApp\\BookRentalApp.csproj|c:\\users\\tomasz\\desktop\\bookrentalapp\\bookrentalapp\\formcustomer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B1A22DBE-C297-436B-993B-7DC6CD167A9F}|BookRentalApp\\BookRentalApp.csproj|solutionrelative:bookrentalapp\\formcustomer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B1A22DBE-C297-436B-993B-7DC6CD167A9F}|BookRentalApp\\BookRentalApp.csproj|c:\\users\\tomasz\\desktop\\bookrentalapp\\bookrentalapp\\models\\rental.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B1A22DBE-C297-436B-993B-7DC6CD167A9F}|BookRentalApp\\BookRentalApp.csproj|solutionrelative:bookrentalapp\\models\\rental.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,7 +38,7 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 2,
               "Title": "Form1.cs [Projekt]",
               "DocumentMoniker": "C:\\Users\\Tomasz\\Desktop\\BookRentalApp\\BookRentalApp\\Form1.cs",
               "RelativeDocumentMoniker": "BookRentalApp\\Form1.cs",
@@ -48,53 +52,66 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Rental.cs",
-              "DocumentMoniker": "C:\\Users\\Tomasz\\Desktop\\BookRentalApp\\BookRentalApp\\Models\\Rental.cs",
-              "RelativeDocumentMoniker": "BookRentalApp\\Models\\Rental.cs",
-              "ToolTip": "C:\\Users\\Tomasz\\Desktop\\BookRentalApp\\BookRentalApp\\Models\\Rental.cs",
-              "RelativeToolTip": "BookRentalApp\\Models\\Rental.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAABwAAAAAAAAAAAAAAA==",
+              "Title": "FormRental.cs",
+              "DocumentMoniker": "C:\\Users\\Tomasz\\Desktop\\BookRentalApp\\BookRentalApp\\FormRental.cs",
+              "RelativeDocumentMoniker": "BookRentalApp\\FormRental.cs",
+              "ToolTip": "C:\\Users\\Tomasz\\Desktop\\BookRentalApp\\BookRentalApp\\FormRental.cs",
+              "RelativeToolTip": "BookRentalApp\\FormRental.cs",
+              "ViewState": "AgIAAGsAAAAAAAAAAAAswIEAAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-08T15:17:06.049Z",
+              "WhenOpened": "2025-05-19T10:28:32.963Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Customer.cs",
-              "DocumentMoniker": "C:\\Users\\Tomasz\\Desktop\\BookRentalApp\\BookRentalApp\\Models\\Customer.cs",
-              "RelativeDocumentMoniker": "BookRentalApp\\Models\\Customer.cs",
-              "ToolTip": "C:\\Users\\Tomasz\\Desktop\\BookRentalApp\\BookRentalApp\\Models\\Customer.cs",
-              "RelativeToolTip": "BookRentalApp\\Models\\Customer.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAABoAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-08T15:17:03.702Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Book.cs",
-              "DocumentMoniker": "C:\\Users\\Tomasz\\Desktop\\BookRentalApp\\BookRentalApp\\Models\\Book.cs",
-              "RelativeDocumentMoniker": "BookRentalApp\\Models\\Book.cs",
-              "ToolTip": "C:\\Users\\Tomasz\\Desktop\\BookRentalApp\\BookRentalApp\\Models\\Book.cs",
-              "RelativeToolTip": "BookRentalApp\\Models\\Book.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAABkAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-08T15:16:58.961Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
               "Title": "Form1.cs",
               "DocumentMoniker": "C:\\Users\\Tomasz\\Desktop\\BookRentalApp\\BookRentalApp\\Form1.cs",
               "RelativeDocumentMoniker": "BookRentalApp\\Form1.cs",
               "ToolTip": "C:\\Users\\Tomasz\\Desktop\\BookRentalApp\\BookRentalApp\\Form1.cs",
               "RelativeToolTip": "BookRentalApp\\Form1.cs",
-              "ViewState": "AgIAANwAAAAAAAAAAAAcwPAAAAAWAAAAAAAAAA==",
+              "ViewState": "AgIAAKgAAAAAAAAAAAAUwLgAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-08T14:42:11.895Z",
+              "WhenOpened": "2025-05-19T10:04:30.789Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "FormCustomer.cs",
+              "DocumentMoniker": "C:\\Users\\Tomasz\\Desktop\\BookRentalApp\\BookRentalApp\\FormCustomer.cs",
+              "RelativeDocumentMoniker": "BookRentalApp\\FormCustomer.cs",
+              "ToolTip": "C:\\Users\\Tomasz\\Desktop\\BookRentalApp\\BookRentalApp\\FormCustomer.cs",
+              "RelativeToolTip": "BookRentalApp\\FormCustomer.cs",
+              "ViewState": "AgIAAHwAAAAAAAAAAAAAAIwAAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-19T09:59:13.272Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "FormBook.cs",
+              "DocumentMoniker": "C:\\Users\\Tomasz\\Desktop\\BookRentalApp\\BookRentalApp\\FormBook.cs",
+              "RelativeDocumentMoniker": "BookRentalApp\\FormBook.cs",
+              "ToolTip": "C:\\Users\\Tomasz\\Desktop\\BookRentalApp\\BookRentalApp\\FormBook.cs",
+              "RelativeToolTip": "BookRentalApp\\FormBook.cs",
+              "ViewState": "AgIAAJIAAAAAAAAAAAA9wKYAAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-19T09:51:30.126Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Rental.cs",
+              "DocumentMoniker": "C:\\Users\\Tomasz\\Desktop\\BookRentalApp\\BookRentalApp\\Models\\Rental.cs",
+              "RelativeDocumentMoniker": "BookRentalApp\\Models\\Rental.cs",
+              "ToolTip": "C:\\Users\\Tomasz\\Desktop\\BookRentalApp\\BookRentalApp\\Models\\Rental.cs",
+              "RelativeToolTip": "BookRentalApp\\Models\\Rental.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-19T08:54:46.69Z",
               "EditorCaption": ""
             }
           ]
