@@ -1,8 +1,0 @@
-INSERT INTO "Customers" ("FullName", "Email", "DateOfBirth") VALUES
-('Jan Kowalski', 'jan@example.com', '1985-05-12'),
-('Anna Nowak', 'anna@example.com', '1990-11-25');
-
-INSERT INTO "Books" ("Title", "Author", "Genre", "IsAvailable") VALUES
-('Wiedźmin', 'Andrzej Sapkowski', 'Fantasy', true),
-('1984', 'George Orwell', 'Dystopia', true),
-('Lalka', 'Bolesław Prus', 'Literatura', true);

@@ -1,0 +1,54 @@
+-- Klienci
+INSERT INTO "Customers" ("FullName", "Email", "DateOfBirth") VALUES
+('Jan Kowalski', 'jan@example.com', '1985-05-12'),
+('Anna Nowak', 'anna@example.com', '1990-11-25'),
+('Michał Wiśniewski', 'michal.w@example.com', '1978-03-10'),
+('Karolina Zielińska', 'karolina.z@example.com', '1992-07-19'),
+('Piotr Lewandowski', 'piotr.l@example.com', '1980-01-05'),
+('Natalia Krawczyk', 'natalia.k@example.com', '1995-12-30'),
+('Tomasz Wójcik', 'tomasz.w@example.com', '1988-09-14'),
+('Ewa Dąbrowska', 'ewa.d@example.com', '1993-04-27');
+
+-- Książki
+INSERT INTO "Books" ("Title", "Author", "Genre", "IsAvailable") VALUES
+('Wiedźmin', 'Andrzej Sapkowski', 'Fantasy', true),
+('1984', 'George Orwell', 'Dystopia', true),
+('Lalka', 'Bolesław Prus', 'Literatura', true),
+('Zbrodnia i kara', 'Fiodor Dostojewski', 'Klasyka', true),
+('Pan Tadeusz', 'Adam Mickiewicz', 'Epika', true),
+('Duma i uprzedzenie', 'Jane Austen', 'Romans', true),
+('Hobbit', 'J.R.R. Tolkien', 'Fantasy', true),
+('Harry Potter i Kamień Filozoficzny', 'J.K. Rowling', 'Fantasy', true),
+('Mały Książę', 'Antoine de Saint-Exupéry', 'Filozofia', true),
+('Solaris', 'Stanisław Lem', 'Science Fiction', true),
+('Gra o tron', 'George R.R. Martin', 'Fantasy', true),
+('Rok 1984', 'George Orwell', 'Dystopia', true),
+('Nowy wspaniały świat', 'Aldous Huxley', 'Dystopia', true);
+
+// Gdyby migracja nie zadziałała
+
+CREATE TABLE "Customers" (
+    "CustomerId" SERIAL PRIMARY KEY,
+    "FullName" TEXT NOT NULL,
+    "Email" TEXT NOT NULL,
+    "DateOfBirth" DATE NOT NULL
+);
+
+CREATE TABLE "Books" (
+    "BookId" SERIAL PRIMARY KEY,
+    "Title" TEXT NOT NULL,
+    "Author" TEXT NOT NULL,
+    "Genre" TEXT,
+    "IsAvailable" BOOLEAN NOT NULL
+);
+
+CREATE TABLE "Rentals" (
+    "RentalId" SERIAL PRIMARY KEY,
+    "RentDate" DATE NOT NULL,
+    "ReturnDate" DATE,
+    "BookId" INTEGER NOT NULL,
+    "CustomerId" INTEGER NOT NULL,
+    FOREIGN KEY ("BookId") REFERENCES "Books"("BookId") ON DELETE CASCADE,
+    FOREIGN KEY ("CustomerId") REFERENCES "Customers"("CustomerId") ON DELETE CASCADE
+);
+
