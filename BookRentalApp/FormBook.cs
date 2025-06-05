@@ -22,6 +22,28 @@ namespace BookRentalApp
             InitializeUI();
         }
 
+        private Book _bookToEdit;
+
+        public FormBook(Book book = null)
+        {
+            InitializeComponent();
+            InitializeUI();
+            _bookToEdit = book;
+
+            if (_bookToEdit != null)
+            {
+                txtTitle.Text = _bookToEdit.Title;
+                txtAuthor.Text = _bookToEdit.Author;
+                txtGenre.Text = _bookToEdit.Genre;
+                this.Text = "Edytuj książkę";
+            }
+            else
+            {
+                this.Text = "Dodaj książkę";
+            }
+        }
+
+
         private void InitializeUI()
         {
             this.Text = "Dodaj książkę";
@@ -35,7 +57,7 @@ namespace BookRentalApp
             {
                 Dock = DockStyle.Fill,
                 ColumnCount = 2,
-                RowCount = 5,
+                RowCount = 4,
                 Padding = new Padding(15),
                 AutoSize = true,
                 AutoSizeMode = AutoSizeMode.GrowAndShrink
@@ -43,7 +65,6 @@ namespace BookRentalApp
 
             mainLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 35F));
             mainLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 65F));
-            mainLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 35F));
             mainLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 35F));
             mainLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 35F));
             mainLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 35F));
@@ -97,22 +118,7 @@ namespace BookRentalApp
             mainLayout.Controls.Add(lblGenre, 0, 2);
             mainLayout.Controls.Add(txtGenre, 1, 2);
 
-            // Label: Dostępna
-            var lblAvailable = new Label
-            {
-                Text = "Dostępna:",
-                TextAlign = ContentAlignment.MiddleLeft,
-                Dock = DockStyle.Fill,
-                Font = new Font("Segoe UI", 10)
-            };
-            chkAvailable = new CheckBox
-            {
-                Dock = DockStyle.Left,
-                Checked = true // Domyślnie zaznaczone
-            };
-            mainLayout.Controls.Add(lblAvailable, 0, 3);
-            mainLayout.Controls.Add(chkAvailable, 1, 3);
-
+         
             // ErrorProvider
             errorProvider1 = new ErrorProvider();
 
@@ -152,15 +158,31 @@ namespace BookRentalApp
 
             try
             {
-                var book = new Book
+                if (_bookToEdit != null)
                 {
-                    Title = txtTitle.Text.Trim(),
-                    Author = txtAuthor.Text.Trim(),
-                    Genre = txtGenre.Text.Trim(),
-                    IsAvailable = chkAvailable.Checked
-                };
+                    // Tryb edycji
+                    var book = _context.Books.Find(_bookToEdit.BookId);
+                    if (book != null)
+                    {
+                        book.Title = txtTitle.Text.Trim();
+                        book.Author = txtAuthor.Text.Trim();
+                        book.Genre = txtGenre.Text.Trim();
+                        book.IsAvailable = true;
+                    }
+                }
+                else
+                {
+                    // Tryb dodawania
+                    var book = new Book
+                    {
+                        Title = txtTitle.Text.Trim(),
+                        Author = txtAuthor.Text.Trim(),
+                        Genre = txtGenre.Text.Trim(),
+                        IsAvailable = true
+                    };
+                    _context.Books.Add(book);
+                }
 
-                _context.Books.Add(book);
                 _context.SaveChanges();
 
                 MessageBox.Show("Książka zapisana.");
@@ -172,6 +194,7 @@ namespace BookRentalApp
                 MessageBox.Show($"Błąd zapisu: {ex.InnerException?.Message ?? ex.Message}");
             }
         }
+
 
         private bool ValidateInputs()
         {

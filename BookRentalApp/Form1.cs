@@ -112,7 +112,8 @@ namespace BookRentalApp
                 AllowUserToAddRows = false,
                 AllowUserToDeleteRows = false,
                 SelectionMode = DataGridViewSelectionMode.FullRowSelect,
-                AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
+                AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill,
+                AutoGenerateColumns = title == "Ksi¹¿ki" ? false : true
             };
 
             if (title == "Ksi¹¿ki")
@@ -139,23 +140,162 @@ namespace BookRentalApp
                 booksPanel.Controls.Add(grid, 0, 1);
                 tabPage.Controls.Add(booksPanel);
 
+
+                grid.Columns.Add(new DataGridViewTextBoxColumn
+                {
+                    DataPropertyName = "ID",
+                    Name = "ID",
+                    Visible = false
+                });
+
                 grid.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "Tytu³", HeaderText = "Tytu³", Width = 200 });
                 grid.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "Autor", HeaderText = "Autor", Width = 150 });
                 grid.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "Gatunek", HeaderText = "Gatunek", Width = 120 });
                 grid.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "Dostêpnoœæ", HeaderText = "Dostêpnoœæ", Width = 120 });
+
+
+                // Dodaj kolumnê "Edytuj"
+                var editButton = new DataGridViewButtonColumn
+                {
+                    HeaderText = "Akcja",
+                    Text = "Edytuj",
+                    UseColumnTextForButtonValue = true,
+                    Width = 70
+                };
+                grid.Columns.Add(editButton);
+
+                // Dodaj kolumnê "Usuñ"
+                var deleteButton = new DataGridViewButtonColumn
+                {
+                    HeaderText = "Akcja",
+                    Text = "Usuñ",
+                    UseColumnTextForButtonValue = true,
+                    Width = 70
+                };
+
+                grid.Columns.Add(deleteButton);
+
+                // Obs³uga klikniêcia
+                grid.CellContentClick += BooksGrid_CellContentClick;
+
 
                 booksGrid = grid;
             }
             else
             {
                 tabPage.Controls.Add(grid);
-                if (title == "U¿ytkownicy") customersGrid = grid;
+                if (title == "U¿ytkownicy")
+                {
+                    grid.CellContentClick += CustomersGrid_CellContentClick;
+                    customersGrid = grid; // przypisujemy globalnie
+                }
                 else if (title == "Historia wypo¿yczeñ") rentalsGrid = grid;
             }
 
             loadAction(grid);
             tabControl.TabPages.Add(tabPage);
         }
+
+        private async void BooksGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
+
+            var grid = sender as DataGridView;
+
+            // Pobierz ID ksi¹¿ki z ukrytej kolumny
+            var idObj = grid.Rows[e.RowIndex].Cells["ID"].Value;
+            if (idObj == null) return;
+
+            int bookId = Convert.ToInt32(idObj);
+
+            using var context = new AppDbContext();
+            var book = await context.Books.FindAsync(bookId);
+
+            if (book == null)
+            {
+                MessageBox.Show("Nie znaleziono ksi¹¿ki.", "B³¹d", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // SprawdŸ czy klikniêto kolumnê przycisku
+            if (grid.Columns[e.ColumnIndex] is DataGridViewButtonColumn)
+            {
+                if (e.ColumnIndex == grid.Columns.Count - 2) // zak³adamy przedostatnia = Edytuj
+                {
+                    var form = new FormBook(book);
+                    if (form.ShowDialog() == DialogResult.OK)
+                        LoadBooks(grid);
+                }
+                else if (e.ColumnIndex == grid.Columns.Count - 1) // ostatnia = Usuñ
+                {
+                    var confirm = MessageBox.Show("Czy na pewno chcesz usun¹æ tê ksi¹¿kê?", "Potwierdzenie", MessageBoxButtons.YesNo);
+                    if (confirm == DialogResult.Yes)
+                    {
+                        try
+                        {
+                            context.Books.Remove(book);
+                            await context.SaveChangesAsync();
+                            LoadBooks(grid);
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("B³¹d usuwania: " + ex.Message);
+                        }
+                    }
+                }
+            }
+        }
+
+        private async void CustomersGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
+
+            var grid = sender as DataGridView;
+            var idObj = grid.Rows[e.RowIndex].Cells["ID"].Value; ;
+            if (idObj == null) return;
+
+            int customerId = Convert.ToInt32(idObj);
+
+            using var context = new AppDbContext();
+            var customer = await context.Customers.FindAsync(customerId);
+
+            if (customer == null)
+            {
+                MessageBox.Show("Nie znaleziono klienta.", "B³¹d", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (grid.Columns[e.ColumnIndex] is DataGridViewButtonColumn)
+            {
+                var buttonText = grid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value?.ToString();
+
+                if (buttonText == "Edytuj")
+                {
+                    var form = new FormCustomer(customer);
+                    if (form.ShowDialog() == DialogResult.OK)
+                        LoadCustomers(grid);
+                }
+                else if (buttonText == "Usuñ")
+                {
+                    var confirm = MessageBox.Show("Czy na pewno chcesz usun¹æ tego klienta?", "Potwierdzenie", MessageBoxButtons.YesNo);
+                    if (confirm == DialogResult.Yes)
+                    {
+                        try
+                        {
+                            context.Customers.Remove(customer);
+                            await context.SaveChangesAsync();
+                            LoadCustomers(grid);
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("B³¹d usuwania: " + ex.Message);
+                        }
+                    }
+                }
+            }
+
+        }
+
 
         private async void LoadBooks(DataGridView dataGridViewBooks)
         {
@@ -175,6 +315,7 @@ namespace BookRentalApp
                         .Include(b => b.Rentals)
                         .Select(b => new
                         {
+                            ID = b.BookId,
                             Tytu³ = b.Title,
                             Autor = b.Author,
                             Gatunek = b.Genre,
@@ -186,6 +327,10 @@ namespace BookRentalApp
                         .ToListAsync();
 
                     dataGridViewBooks.DataSource = books;
+
+                    // Ukryj kolumnê ID (ale jej nie usuwaj!)
+                    if (dataGridViewBooks.Columns["ID"] != null)
+                        dataGridViewBooks.Columns["ID"].Visible = false;
                 }
             }
             catch (Exception ex)
@@ -195,17 +340,64 @@ namespace BookRentalApp
         }
 
 
+
         private async void LoadCustomers(DataGridView grid)
         {
             using (var context = new AppDbContext())
             {
                 var customers = await context.Customers.ToListAsync();
-                grid.DataSource = customers;
 
-                if (grid.Columns["CustomerId"] != null) grid.Columns["CustomerId"].Visible = false;
-                if (grid.Columns["Rentals"] != null) grid.Columns["Rentals"].Visible = false;
+                var data = customers.Select(c => new
+                {
+                    ID = c.CustomerId,
+                    ImieNazwisko = c.FullName,
+                    Email = c.Email,
+                    DataUrodzenia = c.DateOfBirth.ToShortDateString()
+                }).ToList();
+
+                grid.DataSource = data;
+
+                if (grid.Columns["ID"] != null) grid.Columns["ID"].Visible = false;
+
+                // Zmieñ nag³ówki kolumn
+                if (grid.Columns["ImieNazwisko"] != null)
+                    grid.Columns["ImieNazwisko"].HeaderText = "Imiê i nazwisko";
+                if (grid.Columns["Email"] != null)
+                    grid.Columns["Email"].HeaderText = "Email";
+                if (grid.Columns["DataUrodzenia"] != null)
+                    grid.Columns["DataUrodzenia"].HeaderText = "Data urodzenia";
+
+                // Upewnij siê, ¿e kolumny przycisków nie s¹ duplikowane
+                if (grid.Columns["Edytuj"] == null)
+                {
+                    var editButton = new DataGridViewButtonColumn
+                    {
+                        Name = "Edytuj",
+                        HeaderText = "Akcja",
+                        Text = "Edytuj",
+                        UseColumnTextForButtonValue = true,
+                        Width = 70
+                    };
+                    grid.Columns.Add(editButton);
+                }
+
+                if (grid.Columns["Usuñ"] == null)
+                {
+                    var deleteButton = new DataGridViewButtonColumn
+                    {
+                        Name = "Usuñ",
+                        HeaderText = "Akcja",
+                        Text = "Usuñ",
+                        UseColumnTextForButtonValue = true,
+                        Width = 70
+                    };
+                    grid.Columns.Add(deleteButton);
+                }
+
+                customersGrid = grid;
             }
         }
+
 
         private async void LoadRentals(DataGridView grid)
         {

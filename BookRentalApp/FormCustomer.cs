@@ -21,6 +21,28 @@ namespace BookRentalApp
             InitializeUI();
         }
 
+        private Customer _customer;  // pole do trzymania aktualnego klienta
+        private bool _isEditMode = false;
+
+        public FormCustomer(Customer customer = null)
+        {
+            InitializeComponent();
+            InitializeUI();
+
+            if (customer != null)
+            {
+                _isEditMode = true;
+                _customer = customer;
+                this.Text = "Edytuj klienta";
+
+                // Załaduj dane klienta do pól
+                txtName.Text = _customer.FullName;
+                txtEmail.Text = _customer.Email;
+                dateTimePickerDOB.Value = _customer.DateOfBirth.ToLocalTime();
+            }
+        }
+
+
         private void InitializeUI()
         {
             this.Text = "Dodaj klienta";
@@ -127,14 +149,27 @@ namespace BookRentalApp
 
             try
             {
-                var customer = new Customer
+                if (_isEditMode)
                 {
-                    FullName = txtName.Text.Trim(),
-                    Email = txtEmail.Text.Trim(),
-                    DateOfBirth = dateTimePickerDOB.Value.ToUniversalTime()
-                };
+                    // Edycja istniejącego klienta
+                    _customer.FullName = txtName.Text.Trim();
+                    _customer.Email = txtEmail.Text.Trim();
+                    _customer.DateOfBirth = dateTimePickerDOB.Value.ToUniversalTime();
 
-                _context.Customers.Add(customer);
+                    _context.Customers.Update(_customer);
+                }
+                else
+                {
+                    // Nowy klient
+                    var customer = new Customer
+                    {
+                        FullName = txtName.Text.Trim(),
+                        Email = txtEmail.Text.Trim(),
+                        DateOfBirth = dateTimePickerDOB.Value.ToUniversalTime()
+                    };
+                    _context.Customers.Add(customer);
+                }
+
                 _context.SaveChanges();
 
                 MessageBox.Show("Klient zapisany.");
@@ -146,6 +181,7 @@ namespace BookRentalApp
                 MessageBox.Show($"Błąd zapisu: {ex.InnerException?.Message ?? ex.Message}");
             }
         }
+
 
         private bool ValidateInputs()
         {
