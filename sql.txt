@@ -25,6 +25,20 @@ INSERT INTO "Books" ("Title", "Author", "Genre", "IsAvailable") VALUES
 ('Rok 1984', 'George Orwell', 'Dystopia', true),
 ('Nowy wspaniały świat', 'Aldous Huxley', 'Dystopia', true);
 
+-- Wypożyczenia
+INSERT INTO "Rentals" ("RentDate", "ReturnDate", "BookId", "CustomerId") VALUES
+-- aktywne wypożyczenie
+('2025-06-01', 2025-06-07, 1, 1), -- Jan Kowalski wypożyczył "Wiedźmina"
+
+-- zakończone wypożyczenia
+('2025-05-15', '2025-05-25', 2, 2), -- Anna Nowak wypożyczyła "1984"
+('2025-04-10', '2025-04-18', 3, 3), -- Michał Wiśniewski wypożyczył "Lalkę"
+('2025-03-01', '2025-03-20', 4, 4), -- Karolina Zielińska wypożyczyła "Zbrodnię i karę"
+('2025-05-20', '2025-05-30', 5, 5), -- Piotr Lewandowski wypożyczył "Pan Tadeusz"
+('2025-05-10', '2025-05-19', 7, 7), -- Tomasz Wójcik wypożyczył "Hobbit"
+('2025-04-25', '2025-05-05', 8, 8); -- Ewa Dąbrowska wypożyczyła "Harry Potter"
+
+
 // Gdyby migracja nie zadziałała
 
 CREATE TABLE "Customers" (
