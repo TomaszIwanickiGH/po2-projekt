@@ -3221,11 +3221,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Tomasz\\Desktop\\BookRentalApp\\BookRentalApp\\BookRentalApp.csproj",
+      "projectUniqueName": "C:\\Users\\Tomasz\\Desktop\\BookRentalApp — kopia\\BookRentalApp\\BookRentalApp.csproj",
       "projectName": "BookRentalApp",
-      "projectPath": "C:\\Users\\Tomasz\\Desktop\\BookRentalApp\\BookRentalApp\\BookRentalApp.csproj",
+      "projectPath": "C:\\Users\\Tomasz\\Desktop\\BookRentalApp — kopia\\BookRentalApp\\BookRentalApp.csproj",
       "packagesPath": "C:\\Users\\Tomasz\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Tomasz\\Desktop\\BookRentalApp\\BookRentalApp\\obj\\",
+      "outputPath": "C:\\Users\\Tomasz\\Desktop\\BookRentalApp — kopia\\BookRentalApp\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

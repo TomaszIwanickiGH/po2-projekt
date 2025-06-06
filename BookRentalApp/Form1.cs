@@ -9,10 +9,8 @@ namespace BookRentalApp
 {
     public partial class Form1 : Form
     {
-        private TabControl tabControl;
         private TextBox txtSearch;
 
-        // Grids do odœwie¿ania
         private DataGridView booksGrid;
         private DataGridView customersGrid;
         private DataGridView rentalsGrid;
@@ -25,81 +23,11 @@ namespace BookRentalApp
 
         private void InitializeUI()
         {
-            this.Text = "Zarz¹dzanie wypo¿yczeniami";
-            this.MinimumSize = new Size(800, 600);
-            this.StartPosition = FormStartPosition.CenterScreen;
-
-            tabControl = new TabControl { Dock = DockStyle.Fill };
-            this.Controls.Add(tabControl);
+            tabControlTest.TabPages.Clear();
 
             AddTab("Ksi¹¿ki", LoadBooks);
             AddTab("U¿ytkownicy", LoadCustomers);
             AddTab("Historia wypo¿yczeñ", LoadRentals);
-
-            var leftPanel = new Panel
-            {
-                Dock = DockStyle.Left,
-                Width = 150,
-                BackColor = Color.FromArgb(45, 45, 48)
-            };
-            this.Controls.Add(leftPanel);
-
-            var tableLayout = new TableLayoutPanel
-            {
-                Dock = DockStyle.Top,
-                ColumnCount = 1,
-                RowCount = 3,
-                AutoSize = true,
-                Padding = new Padding(10)
-            };
-
-            tableLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 40));
-            tableLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 40));
-            tableLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 40));
-
-            Size buttonSize = new Size(130, 30);
-            Font buttonFont = new Font("Segoe UI", 9, FontStyle.Bold);
-
-            var btnCustomer = new Button
-            {
-                Text = "Dodaj klienta",
-                Size = buttonSize,
-                Font = buttonFont,
-                BackColor = Color.Teal,
-                ForeColor = Color.White,
-                FlatStyle = FlatStyle.Flat,
-                Margin = new Padding(5)
-            };
-            btnCustomer.Click += btnCustomers_Click;
-            tableLayout.Controls.Add(btnCustomer, 0, 0);
-
-            var btnBook = new Button
-            {
-                Text = "Dodaj ksi¹¿kê",
-                Size = buttonSize,
-                Font = buttonFont,
-                BackColor = Color.Teal,
-                ForeColor = Color.White,
-                FlatStyle = FlatStyle.Flat,
-                Margin = new Padding(5)
-            };
-            btnBook.Click += btnBooks_Click;
-            tableLayout.Controls.Add(btnBook, 0, 1);
-
-            var btnRental = new Button
-            {
-                Text = "Wypo¿ycz ksi¹¿kê",
-                Size = buttonSize,
-                Font = buttonFont,
-                BackColor = Color.Teal,
-                ForeColor = Color.White,
-                FlatStyle = FlatStyle.Flat,
-                Margin = new Padding(5)
-            };
-            btnRental.Click += btnRentals_Click;
-            tableLayout.Controls.Add(btnRental, 0, 2);
-
-            leftPanel.Controls.Add(tableLayout);
         }
 
         private void AddTab(string title, Action<DataGridView> loadAction)
@@ -153,8 +81,6 @@ namespace BookRentalApp
                 grid.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "Gatunek", HeaderText = "Gatunek", Width = 120 });
                 grid.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "Dostêpnoœæ", HeaderText = "Dostêpnoœæ", Width = 120 });
 
-
-                // Dodaj kolumnê "Edytuj"
                 var editButton = new DataGridViewButtonColumn
                 {
                     HeaderText = "Akcja",
@@ -164,7 +90,6 @@ namespace BookRentalApp
                 };
                 grid.Columns.Add(editButton);
 
-                // Dodaj kolumnê "Usuñ"
                 var deleteButton = new DataGridViewButtonColumn
                 {
                     HeaderText = "Akcja",
@@ -175,7 +100,6 @@ namespace BookRentalApp
 
                 grid.Columns.Add(deleteButton);
 
-                // Obs³uga klikniêcia
                 grid.CellContentClick += BooksGrid_CellContentClick;
 
 
@@ -187,13 +111,13 @@ namespace BookRentalApp
                 if (title == "U¿ytkownicy")
                 {
                     grid.CellContentClick += CustomersGrid_CellContentClick;
-                    customersGrid = grid; // przypisujemy globalnie
+                    customersGrid = grid;
                 }
                 else if (title == "Historia wypo¿yczeñ") rentalsGrid = grid;
             }
 
             loadAction(grid);
-            tabControl.TabPages.Add(tabPage);
+            tabControlTest.TabPages.Add(tabPage);
         }
 
         private async void BooksGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -202,7 +126,6 @@ namespace BookRentalApp
 
             var grid = sender as DataGridView;
 
-            // Pobierz ID ksi¹¿ki z ukrytej kolumny
             var idObj = grid.Rows[e.RowIndex].Cells["ID"].Value;
             if (idObj == null) return;
 
@@ -217,16 +140,15 @@ namespace BookRentalApp
                 return;
             }
 
-            // SprawdŸ czy klikniêto kolumnê przycisku
             if (grid.Columns[e.ColumnIndex] is DataGridViewButtonColumn)
             {
-                if (e.ColumnIndex == grid.Columns.Count - 2) // zak³adamy przedostatnia = Edytuj
+                if (e.ColumnIndex == grid.Columns.Count - 2) 
                 {
                     var form = new FormBook(book);
                     if (form.ShowDialog() == DialogResult.OK)
                         LoadBooks(grid);
                 }
-                else if (e.ColumnIndex == grid.Columns.Count - 1) // ostatnia = Usuñ
+                else if (e.ColumnIndex == grid.Columns.Count - 1)
                 {
                     var confirm = MessageBox.Show("Czy na pewno chcesz usun¹æ tê ksi¹¿kê?", "Potwierdzenie", MessageBoxButtons.YesNo);
                     if (confirm == DialogResult.Yes)
@@ -328,7 +250,6 @@ namespace BookRentalApp
 
                     dataGridViewBooks.DataSource = books;
 
-                    // Ukryj kolumnê ID (ale jej nie usuwaj!)
                     if (dataGridViewBooks.Columns["ID"] != null)
                         dataGridViewBooks.Columns["ID"].Visible = false;
                 }
@@ -359,7 +280,6 @@ namespace BookRentalApp
 
                 if (grid.Columns["ID"] != null) grid.Columns["ID"].Visible = false;
 
-                // Zmieñ nag³ówki kolumn
                 if (grid.Columns["ImieNazwisko"] != null)
                     grid.Columns["ImieNazwisko"].HeaderText = "Imiê i nazwisko";
                 if (grid.Columns["Email"] != null)
@@ -367,7 +287,6 @@ namespace BookRentalApp
                 if (grid.Columns["DataUrodzenia"] != null)
                     grid.Columns["DataUrodzenia"].HeaderText = "Data urodzenia";
 
-                // Upewnij siê, ¿e kolumny przycisków nie s¹ duplikowane
                 if (grid.Columns["Edytuj"] == null)
                 {
                     var editButton = new DataGridViewButtonColumn
@@ -419,7 +338,7 @@ namespace BookRentalApp
             }
         }
 
-        // Zmodyfikowane przyciski z odœwie¿aniem ??
+
         private void btnCustomers_Click(object sender, EventArgs e)
         {
             FormCustomer formCustomer = new FormCustomer();
@@ -440,7 +359,7 @@ namespace BookRentalApp
             if (formRental.ShowDialog() == DialogResult.OK)
             {
                 LoadRentals(rentalsGrid);
-                LoadBooks(booksGrid); // ¿eby zaktualizowaæ dostêpnoœæ ksi¹¿ki
+                LoadBooks(booksGrid); 
             }
         }
     }

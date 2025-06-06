@@ -10,102 +10,10 @@ namespace BookRentalApp
     {
         private readonly AppDbContext _context = new AppDbContext();
 
-        private ComboBox comboCustomers;
-        private ComboBox comboBooks;
-        private Button btnRent;
-
         public FormRental()
         {
             InitializeComponent();
-            InitializeUI();
             LoadData();
-        }
-
-        private void InitializeUI()
-        {
-            this.Text = "Nowe wypożyczenie";
-            this.Size = new Size(380, 200);
-            this.MinimumSize = new Size(380, 200);
-            this.StartPosition = FormStartPosition.CenterParent;
-            this.FormBorderStyle = FormBorderStyle.FixedDialog;
-            this.BackColor = Color.White;
-
-            var mainLayout = new TableLayoutPanel
-            {
-                Dock = DockStyle.Fill,
-                ColumnCount = 2,
-                RowCount = 3,
-                Padding = new Padding(15),
-                AutoSize = true,
-                AutoSizeMode = AutoSizeMode.GrowAndShrink
-            };
-
-            mainLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 35F));
-            mainLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 65F));
-            mainLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 35F));
-            mainLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 35F));
-            mainLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 45F));
-
-            // Label: Klient
-            var lblCustomer = new Label
-            {
-                Text = "Klient:",
-                TextAlign = ContentAlignment.MiddleLeft,
-                Dock = DockStyle.Fill,
-                Font = new Font("Segoe UI", 10, FontStyle.Regular)
-            };
-            comboCustomers = new ComboBox
-            {
-                DropDownStyle = ComboBoxStyle.DropDownList,
-                Dock = DockStyle.Fill,
-                Font = new Font("Segoe UI", 10, FontStyle.Regular)
-            };
-            mainLayout.Controls.Add(lblCustomer, 0, 0);
-            mainLayout.Controls.Add(comboCustomers, 1, 0);
-
-            // Label: Książka
-            var lblBook = new Label
-            {
-                Text = "Książka:",
-                TextAlign = ContentAlignment.MiddleLeft,
-                Dock = DockStyle.Fill,
-                Font = new Font("Segoe UI", 10, FontStyle.Regular)
-            };
-            comboBooks = new ComboBox
-            {
-                DropDownStyle = ComboBoxStyle.DropDownList,
-                Dock = DockStyle.Fill,
-                Font = new Font("Segoe UI", 10, FontStyle.Regular)
-            };
-            mainLayout.Controls.Add(lblBook, 0, 1);
-            mainLayout.Controls.Add(comboBooks, 1, 1);
-
-            // Button: Wypożycz
-            btnRent = new Button
-            {
-                Text = "Wypożycz",
-                Width = 120,
-                Height = 35,
-                Anchor = AnchorStyles.Right,
-                BackColor = Color.Teal,
-                ForeColor = Color.White,
-                FlatStyle = FlatStyle.Flat,
-                Font = new Font("Segoe UI", 10, FontStyle.Bold),
-                Margin = new Padding(0, 10, 0, 0)
-            };
-            btnRent.Click += btnRent_Click;
-
-            var buttonPanel = new FlowLayoutPanel
-            {
-                FlowDirection = FlowDirection.RightToLeft,
-                Dock = DockStyle.Fill
-            };
-            buttonPanel.Controls.Add(btnRent);
-
-            mainLayout.Controls.Add(buttonPanel, 0, 2);
-            mainLayout.SetColumnSpan(buttonPanel, 2);
-
-            this.Controls.Add(mainLayout);
         }
 
         private void LoadData()
@@ -118,7 +26,6 @@ namespace BookRentalApp
 
             var currentTime = DateTime.UtcNow;
 
-            // Zwracaj książki, które są dostępne (brak wypożyczeń lub ostatnie zwrócone)
             var availableBooks = _context.Books
                 .Where(b => !b.Rentals.Any() ||
                             b.Rentals.OrderByDescending(r => r.RentDate)
